@@ -9,4 +9,10 @@ function change_won_currency_symbol( $currency_symbol, $currency ) {
     return $currency_symbol;
 }
 
+// 우커머스 장바구니 비었을 때 상점으로 돌아가기 버튼 리디랙션 커스텀
+add_filter( 'woocommerce_return_to_shop_redirect', 'custom_woocommerce_return_to_shop_redirect' );
+function custom_woocommerce_return_to_shop_redirect() {
+	return site_url() . '/전체강의/';
+}
+
 ?>
