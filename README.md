@@ -17,6 +17,6 @@ function change_won_currency_symbol( $currency_symbol, $currency ) {
 ```php
 add_filter( 'woocommerce_return_to_shop_redirect', 'custom_woocommerce_return_to_shop_redirect' );
 function custom_woocommerce_return_to_shop_redirect() {
-	return site_url() . '/전체강의/';
+    return site_url() . '/전체강의/';
 }
 ```
