@@ -15,4 +15,11 @@ function custom_woocommerce_return_to_shop_redirect() {
     return site_url() . '/전체강의/';
 }
 
+// SVG 사용
+add_filter( 'mime_types', 'custom_upload_mimes' );
+function custom_upload_mimes( $existing_mimes ) {
+	$existing_mimes['svg'] = 'image/svg+xml';
+	return $existing_mimes;
+}
+
 ?>
