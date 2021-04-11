@@ -22,4 +22,10 @@ function custom_upload_mimes( $existing_mimes ) {
 	return $existing_mimes;
 }
 
+// Custom.js 추가 연결
+add_action( 'wp_enqueue_scripts', 'my_custom_scripts' );
+function my_custom_scripts() {
+    wp_enqueue_script( 'custom-js', get_stylesheet_directory_uri() . '/js/custom.js', array( 'jquery' ),'',true );
+}
+
 ?>
