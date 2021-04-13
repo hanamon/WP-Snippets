@@ -28,4 +28,12 @@ function my_custom_scripts() {
     wp_enqueue_script( 'custom-js', get_stylesheet_directory_uri() . '/js/custom.js', array( 'jquery' ),'',true );
 }
 
+// 메뉴 숏코드 사용 [menu name="menu_name"]
+add_shortcode('menu', 'print_menu_shortcode');
+function print_menu_shortcode($atts, $content = null) {
+    extract(shortcode_atts(array( 'name' => null, 'class' => null ), $atts));
+    return wp_nav_menu( array( 'menu' => $name, 'menu_class' => 'myMenuClass', 'echo' => false ) );
+}
+
+
 ?>
