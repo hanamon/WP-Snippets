@@ -35,6 +35,22 @@ function print_menu_shortcode($atts, $content = null) {
     return wp_nav_menu( array( 'menu' => $name, 'menu_class' => 'myMenuClass', 'echo' => false ) );
 }
 
+// 페이지 포스트 타입에 '페이지 카테고리' 추가
+add_action( 'init', 'custom_taxonomies_with_page', 0 );
+function custom_taxonomies_with_page() {
+	// page-category
+	register_taxonomy( 'page-category', array( 'page' ), array(
+		'labels' => array(
+			'name' => '페이지 카테고리',
+			'label' => '페이지 카테고리',
+			'menu_name' => '카테고리',
+		),
+		'hierarchical' => true, // Default: false
+		'show_admin_column' => true, // Default: false
+		'show_in_rest' => true,
+	) );
+}
+
 // Divi 모듈에서 커스텀 포스트 타입 검색
 add_action( 'wp_loaded', 'custom_remove_default_et_pb_custom_search' );
 function custom_remove_default_et_pb_custom_search(){
