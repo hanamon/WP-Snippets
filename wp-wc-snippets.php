@@ -87,4 +87,23 @@ function custom_et_pb_custom_search( $query = false ){
 	}
 }
 
-?>
+// 관리자에 사용자 지정 분류 드롭 다운 표시
+add_action('restrict_manage_posts', 'page_filter_custom_post_type_by_taxonomy');
+function page_filter_custom_post_type_by_taxonomy() {
+	global $typenow;
+	$post_type = 'page'; 			// 게시물 유형 변경
+	$taxonomy  = 'page-category'; 	// 분류법 변경
+	if ($typenow == $post_type) {
+		$selected      = isset($_GET[$taxonomy]) ? $_GET[$taxonomy] : '';
+		$info_taxonomy = get_taxonomy($taxonomy);
+		wp_dropdown_categories(array(
+			'show_option_all' => sprintf( __( '모든 %s', 'textdomain' ), $info_taxonomy->label ),
+			'taxonomy'        => $taxonomy,
+			'name'            => $taxonomy,
+			'orderby'         => 'name',
+			'selected'        => $selected,
+			'show_count'      => true,
+			'hide_empty'      => true,
+		));
+	};
+}
