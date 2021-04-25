@@ -107,3 +107,16 @@ function page_filter_custom_post_type_by_taxonomy() {
 		));
 	};
 }
+
+// 관리자에서 분류별로 게시물 필터링
+add_filter('parse_query', 'page_convert_id_to_term_in_query');
+function page_convert_id_to_term_in_query($query) {
+	global $pagenow;
+	$post_type = 'page';			// 게시물 유형 변경
+	$taxonomy  = 'page-category'; 	// 분류법 변경
+	$q_vars    = &$query->query_vars;
+	if ( $pagenow == 'edit.php' && isset($q_vars['post_type']) && $q_vars['post_type'] == $post_type && isset($q_vars[$taxonomy]) && is_numeric($q_vars[$taxonomy]) && $q_vars[$taxonomy] != 0 ) {
+		$term = get_term_by('id', $q_vars[$taxonomy], $taxonomy);
+		$q_vars[$taxonomy] = $term->slug;
+	}
+}
