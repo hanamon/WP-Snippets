@@ -20,3 +20,12 @@ function custom_woocommerce_return_to_shop_redirect() {
     return site_url() . '/전체강의/';
 }
 ```
+
+### 3. 워드프레스에서 SVG 파일 사용할 수 있는 스니펫
+```php
+add_filter( 'mime_types', 'custom_upload_mimes' );
+function custom_upload_mimes( $existing_mimes ) {
+	$existing_mimes['svg'] = 'image/svg+xml';
+	return $existing_mimes;
+}
+```
